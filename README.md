@@ -1,11 +1,11 @@
 
-# College Library Management System — Database Design
+# College Library Management System - Database Design
 
 A relational database design and SQL implementation for a college library, modeling students, books, authors, categories, and the borrowing process. Built as part of my Data Science and Analytics diploma coursework and extended here as a portfolio-ready project.
 
 ## Problem
 
-Colleges need a way to track which books exist, who borrows them, when they're due back, and how fines are calculated for late returns — while keeping data consistent and avoiding duplication (e.g., an author's details shouldn't be repeated for every book they've written).
+Colleges need a way to track which books exist, who borrows them, when they're due back, and how fines are calculated for late returns - while keeping data consistent and avoiding duplication (e.g., an author's details shouldn't be repeated for every book they've written).
 
 ## Entity Relationship Diagram
 
@@ -65,9 +65,9 @@ erDiagram
 
 ## Design Decisions
 
-- **STUDENT–BOOK is many-to-many** (a student borrows many books over time; a book is borrowed by many students over time). This is resolved with the **BORROW** associative entity, which also carries its own attributes (dates, fine) — a textbook case for why a junction table is needed instead of a direct many-to-many link.
+- **STUDENT–BOOK is many-to-many** (a student borrows many books over time; a book is borrowed by many students over time). This is resolved with the **BORROW** associative entity, which also carries its own attributes (dates, fine) - a textbook case for why a junction table is needed instead of a direct many-to-many link.
 - **AUTHOR and CATEGORY are separated out** rather than stored as plain text columns on BOOK. This avoids repeating an author's full details on every book row (violates 1NF/2NF spirit) and makes it possible to query "all books by this author" cleanly.
-- **`available_copies` vs `total_copies`** on BOOK tracks real-time inventory without needing to COUNT active borrows every time — a common trade-off between normalization purity and query performance.
+- **`available_copies` vs `total_copies`** on BOOK tracks real-time inventory without needing to COUNT active borrows every time - a common trade-off between normalization purity and query performance.
 - **Constraints**: `CHECK (due_date >= borrow_date)` and `CHECK (available_copies <= total_copies)` enforce business rules at the database level, not just in application code.
 
 ## Files
@@ -108,4 +108,4 @@ WHERE br.return_date IS NULL
 - Build a simple Power BI dashboard on top of this schema (borrow trends, overdue rates, most active students)
 
 ---
-*Author: Bree — Diploma in Data Science and Analytics, Zetech University*
+*Author: Bree - Diploma in Data Science and Analytics, Zetech University*
